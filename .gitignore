@@ -1,0 +1,6 @@
+*.elf
+*.velf
+*.vpk
+*.bin
+*.o
+src/AndroidGameLinux
