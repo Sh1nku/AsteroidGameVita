@@ -3,4 +3,4 @@
 *.vpk
 *.bin
 *.o
-src/AndroidGameLinux
+src/AsteroidGameLinux
