@@ -15,6 +15,7 @@ int main(int argc, char* args[]) {
 		player.render();
 		endDraw();
 		player.updateAnimation();
+		Globals::world->Step(0.016, 10);
 	}
 	exit();
 }
