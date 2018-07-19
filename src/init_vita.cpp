@@ -17,7 +17,7 @@ void endDraw() {
 }
 
 void exit() {
-	
+
 }
 
 #endif

@@ -8,24 +8,30 @@ enum ANIMATION {
 	IDLE, LEFT, RIGHT
 };
 
+class Controller;
+
 class Player {
-	public:
+public:
 
 	Player();
 	~Player();
 	void render();
-	void updateAnimation();
+	void update();
 	void setAnimation(ANIMATION anim);
 
 	b2Vec2 texCoords[ANIMATIONS][FRAMES];
 	GLuint textureID;
 	int currentFrame = 0;
 	int currentAnimation = ANIMATION::IDLE;
-	private:
+private:
+	void updateAnimation();
+	void updateControls();
+
 	int spriteWidth = 32;
 	int spriteHeight = 32;
 	int textureWidth = 128;
 	int textureHeight = 96;
 	b2Body *body;
-	
+	Controller *controller;
+
 };

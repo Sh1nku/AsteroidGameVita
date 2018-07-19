@@ -6,7 +6,7 @@ SDL_Window* gWindow = NULL;
 SDL_GLContext gContext;
 
 void init() {
-	SDL_Init(SDL_INIT_VIDEO);
+	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
 	IMG_Init(IMG_INIT_PNG);
   	SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 2 );
   	SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 1 );

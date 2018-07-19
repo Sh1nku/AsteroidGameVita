@@ -2,6 +2,7 @@
 #include "utils.h"
 #include "headers.h"
 #include "globals.h"
+#include "controller.h"
 
 Player::Player() {
 
@@ -17,7 +18,6 @@ Player::Player() {
 	polygonDef.density = 1.0f;
 	bodyDef.AddShape(&polygonDef);
 	body = Globals::world->CreateBody(&bodyDef);
-	body->SetAngularVelocity(0.1f);
 
 	for(int i = 0; i < ANIMATIONS; i++) {
 		for(int j = 0; j < FRAMES; j++) {
@@ -25,9 +25,13 @@ Player::Player() {
 		}
 	}
 	textureID = loadTexture("textures/ship.png");
+
+	controller = new Controller();
 }
 
-Player::~Player() {}
+Player::~Player() {
+	delete controller;
+}
 
 void Player::render() {
 	int x = texCoords[currentAnimation][currentFrame].x;
@@ -49,9 +53,19 @@ void Player::render() {
 	glPopMatrix();
 }
 
+void Player::update() {
+	updateAnimation();
+	controller->update();
+	updateControls();
+}
+
+void Player::updateControls() {
+	body->SetLinearVelocity(b2Vec2(controller->leftAxisX / 10, -controller->leftAxisY / 10));
+}
+
 void Player::updateAnimation() {
 	if(currentFrame == FRAMES-1) {
-		currentFrame = 0;	
+		currentFrame = 0;
 	}
 	else {
 		currentFrame++;

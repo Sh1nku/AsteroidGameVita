@@ -9,12 +9,12 @@ int main(int argc, char* args[]) {
 	initGL();
 	Player player;
 
-	while(true) {
+	while(!Globals::quit) {
 		startDraw();
 		glLoadIdentity();
 		player.render();
 		endDraw();
-		player.updateAnimation();
+		player.update();
 		Globals::world->Step(0.016, 10);
 	}
 	exit();

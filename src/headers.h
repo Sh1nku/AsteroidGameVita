@@ -9,5 +9,7 @@
 #include <vita2d.h>
 #include <vitaGL.h>
 #include <Box2D.h>
+#include <psp2/kernel/processmgr.h>
+#include <psp2/ctrl.h>
 #endif
 #include <string>
