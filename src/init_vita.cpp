@@ -4,6 +4,7 @@
 
 void init() {
 	vglInit(0x800000);
+	vglWaitVblankStart(true);
 }
 
 void startDraw() {

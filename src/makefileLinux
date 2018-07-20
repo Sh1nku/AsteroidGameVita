@@ -2,7 +2,8 @@ LDFLAGS := -lSDL2 -lSDL2_image -lGL -lbox2d -DDEBUG
 NAME := AsteroidGameLinux
 
 all:
-	g++ -o $(NAME) main.cpp globals.cpp init_linux.cpp utils_linux.cpp player.cpp controller_linux.cpp $(LDFLAGS)
+	g++ -o $(NAME) main.cpp globals.cpp init_linux.cpp utils_linux.cpp \
+	 player.cpp controller_linux.cpp time_linux.cpp $(LDFLAGS)
 
 clean:
 	@rm -rf $(NAME)

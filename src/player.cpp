@@ -60,7 +60,7 @@ void Player::update() {
 }
 
 void Player::updateControls() {
-	body->SetLinearVelocity(b2Vec2(controller->leftAxisX / 10, -controller->leftAxisY / 10));
+	body->SetLinearVelocity(b2Vec2(controller->leftAxisX*3, -controller->leftAxisY*3));
 }
 
 void Player::updateAnimation() {
