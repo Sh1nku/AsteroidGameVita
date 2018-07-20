@@ -11,6 +11,8 @@
 #include <Box2D.h>
 #include <psp2/kernel/processmgr.h>
 #include <psp2/ctrl.h>
-#include <psp2/rtc.h> 
+#include <psp2/rtc.h>
 #endif
+#include <math.h>
 #include <string>
+#include <map>

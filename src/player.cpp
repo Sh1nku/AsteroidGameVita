@@ -24,7 +24,7 @@ Player::Player() {
 			texCoords[i][j] = b2Vec2(spriteWidth*j, (spriteHeight*3)-(spriteHeight*i));
 		}
 	}
-	textureID = loadTexture("textures/ship.png");
+	textureID = Globals::getTexture("textures/ship.png");
 
 	controller = new Controller();
 }
@@ -38,7 +38,7 @@ void Player::render() {
 	int y = texCoords[currentAnimation][currentFrame].y;
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glPushMatrix();
-	glTranslatef(body->GetOriginPosition().x,body->GetOriginPosition().y,-2);
+	glTranslatef(body->GetOriginPosition().x,body->GetOriginPosition().y,-8);
 	glRotatef((float) radToDeg(body->GetRotation()), 0, 0, 1);
 	glBegin(GL_QUADS);
 	glTexCoord2f(((float)x + spriteWidth) / textureWidth,((float)y + spriteHeight) / textureHeight);

@@ -26,7 +26,9 @@ all: $(TARGET).vpk
 $(TARGET).vpk: eboot.bin
 	vita-mksfoex -s TITLE_ID=ANDY00001 "$(TARGET)" param.sfo
 	vita-pack-vpk -s param.sfo -b eboot.bin \
-	-a textures/ship.png=textures/ship.png $@
+	-a textures/ship.png=textures/ship.png \
+	-a textures/asteroid1.png=textures/asteroid1.png \
+	-a textures/asteroid2.png=textures/asteroid2.png $@
 
 eboot.bin: $(TARGET).velf
 	vita-make-fself -s $< eboot.bin
