@@ -61,6 +61,15 @@ void Player::update() {
 
 void Player::updateControls() {
 	body->SetLinearVelocity(b2Vec2(controller->leftAxisX*3, -controller->leftAxisY*3));
+	if(controller->leftAxisX > 0) {
+		setAnimation(ANIMATION::RIGHT);
+	}
+	else if(controller->leftAxisX < 0) {
+		setAnimation(ANIMATION::LEFT);
+	}
+	else {
+		setAnimation(ANIMATION::IDLE);
+	}
 }
 
 void Player::updateAnimation() {
