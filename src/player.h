@@ -1,5 +1,6 @@
 #pragma once
 #include "headers.h"
+#include "gameobject.h"
 
 const int FRAMES = 4;
 const int ANIMATIONS = 3;
@@ -10,7 +11,7 @@ enum ANIMATION {
 
 class Controller;
 
-class Player {
+class Player : public GameObject{
 public:
 
 	Player();
@@ -18,6 +19,8 @@ public:
 	void render();
 	void update();
 	void setAnimation(ANIMATION anim);
+	TYPE getType();
+	void hit();
 
 	b2Vec2 texCoords[ANIMATIONS][FRAMES];
 	GLuint textureID;
@@ -33,6 +36,8 @@ private:
 	int textureWidth = 128;
 	int textureHeight = 96;
 	b2Body *body;
+	b2BodyDef bodyDef;
+	b2PolyDef polygonDef;
 	Controller *controller;
 
 };

@@ -2,6 +2,7 @@
 #include "headers.h"
 #include "globals.h"
 #include "utils.h"
+#include "gameobject.h"
 
 Asteroid::Asteroid(const char *name, int xSize, int ySize, b2PolyDef *polyDef) {
   spriteWidth = xSize;
@@ -9,6 +10,7 @@ Asteroid::Asteroid(const char *name, int xSize, int ySize, b2PolyDef *polyDef) {
   scale = spriteWidth / UNIT_SIZE;
   bodyDef.position.Set(0, 0);
   bodyDef.AddShape(polyDef);
+  bodyDef.userData = NULL;
   textureID = Globals::getTexture(name);
 }
 
@@ -18,10 +20,13 @@ Asteroid::Asteroid(const Asteroid &obj, float x, float y, float rotation) {
   scale = obj.scale;
   bodyDef = obj.bodyDef;
   bodyDef.position.Set(x, y);
+  bodyDef.userData = this;
   textureID = obj.textureID;
   body = Globals::world->CreateBody(&bodyDef);
   body->SetAngularVelocity(0.5);
 }
+
+Asteroid::~Asteroid() {}
 
 void Asteroid::render() {
 	glBindTexture(GL_TEXTURE_2D, textureID);
@@ -39,4 +44,12 @@ void Asteroid::render() {
 	glVertex3f(-0.5f * scale, 0.5f * scale, 0);
 	glEnd();
 	glPopMatrix();
+}
+
+void Asteroid::hit() {
+  destroy = true;
+}
+
+TYPE Asteroid::getType() {
+	return TYPE::ASTEROID;
 }

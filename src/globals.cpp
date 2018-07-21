@@ -4,8 +4,8 @@
 
 b2World *Globals::world;
 std::map<std::string, GLuint> Globals::textures;
-std::vector<Asteroid> Globals::asteroidPrefabs;
-std::vector<Asteroid> Globals::asteroids;
+std::vector<Asteroid*> Globals::asteroidPrefabs;
+std::vector<Asteroid*> Globals::asteroids;
 bool Globals::quit = false;
 
 b2PolyDef asteroid1Polygons;
@@ -25,7 +25,7 @@ void Globals::init() {
 	asteroid1Polygons.vertices[5].Set(-0.3125, -0.0625);
 	asteroid1Polygons.density = 1.0f;
 
-	asteroidPrefabs.push_back(Asteroid("textures/asteroid1.png", 32, 32, &asteroid1Polygons));
+	asteroidPrefabs.push_back(new Asteroid("textures/asteroid1.png", 32, 32, &asteroid1Polygons));
 }
 
 GLuint Globals::getTexture(const char* name) {
@@ -42,12 +42,22 @@ GLuint Globals::getTexture(const char* name) {
 
 void Globals::createRandomAsteroid() {
 	int randomAsteroid = rand() % asteroidPrefabs.size();
-	asteroids.push_back(Asteroid(asteroidPrefabs.at(randomAsteroid),
-	1, 1, 0));
+	Asteroid *ast = new Asteroid(*asteroidPrefabs.at(randomAsteroid), rand()%6, 3, 0);
+	asteroids.push_back(ast);
 }
 
 void Globals::renderAsteroids() {
 	for(int i = 0; i < asteroids.size(); i++) {
-		asteroids.at(i).render();
+		asteroids.at(i)->render();
+	}
+}
+
+void Globals::checkAsteroidsAndDestroy() {
+	std::vector<Asteroid*>::iterator it = asteroids.begin();
+	for( ; it != asteroids.end();) {
+	if ((*it)->destroy)
+			it = asteroids.erase(it);
+	else
+			++it;
 	}
 }

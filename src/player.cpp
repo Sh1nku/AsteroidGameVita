@@ -3,14 +3,14 @@
 #include "headers.h"
 #include "globals.h"
 #include "controller.h"
+#include "gameobject.h"
 
 Player::Player() {
 
 	scale = spriteWidth / UNIT_SIZE;
-	b2BodyDef bodyDef;
 	bodyDef.position.Set(0.0f, 0.0f);
 	bodyDef.preventRotation = true;
-	b2PolyDef polygonDef;
+	bodyDef.userData = this;
 	polygonDef.vertexCount = 5;
 	polygonDef.vertices[0].Set(-0.40625 * scale, -0.375 * scale);
 	polygonDef.vertices[1].Set(0.40625 * scale,  -0.375 * scale);
@@ -91,4 +91,12 @@ void Player::setAnimation(ANIMATION anim) {
 		currentAnimation = anim;
 		currentFrame = 0;
 	}
+}
+
+void Player::hit() {
+
+}
+
+TYPE Player::getType() {
+	return TYPE::PLAYER;
 }

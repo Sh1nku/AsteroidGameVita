@@ -14,9 +14,10 @@ public:
 	static GLuint getTexture(const char* name);
 	static void createRandomAsteroid();
 	static void renderAsteroids();
+	static void checkAsteroidsAndDestroy();
+	static std::vector<Asteroid*> asteroids;
 
 private:
 	static std::map<std::string ,GLuint> textures;
-	static std::vector<Asteroid> asteroidPrefabs;
-	static std::vector<Asteroid> asteroids;
+	static std::vector<Asteroid*> asteroidPrefabs;
 };
