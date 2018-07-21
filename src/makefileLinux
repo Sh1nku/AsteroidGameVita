@@ -4,7 +4,7 @@ NAME := AsteroidGameLinux
 all:
 	g++ -o $(NAME) main.cpp globals.cpp init_linux.cpp utils_linux.cpp \
 	 gameobject.cpp player.cpp controller_linux.cpp time_linux.cpp asteroid.cpp \
-	  $(LDFLAGS)
+	 vectormath.cpp $(LDFLAGS)
 
 clean:
 	@rm -rf $(NAME)

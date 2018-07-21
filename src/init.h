@@ -22,7 +22,7 @@ static void initGL() {
 	glCullFace (GL_BACK);
 	glFrontFace (GL_CCW);
 
-	glClearColor(0.1f, 0, 0, 1);
+	glClearColor(0, 0, 0, 1);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(45, RATIO, 7, 10);

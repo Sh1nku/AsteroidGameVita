@@ -8,11 +8,12 @@ SDL_GLContext gContext;
 void init() {
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK | SDL_INIT_TIMER);
 	IMG_Init(IMG_INIT_PNG);
-  	SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 2 );
+	SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 ); 
+	SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 2 );
   	SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 1 );
-	SDL_GL_SetSwapInterval(1);
 	gWindow = SDL_CreateWindow( "AsteroidsGame", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 960, 544,SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 	gContext = SDL_GL_CreateContext( gWindow );
+	SDL_GL_SetSwapInterval(1);
 }
 
 void startDraw() {

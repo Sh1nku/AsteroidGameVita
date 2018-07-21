@@ -16,16 +16,17 @@ Asteroid::Asteroid(const char *name, int xSize, int ySize, b2PolyDef *polyDef) {
   textureID = Globals::getTexture(name);
 }
 
-Asteroid::Asteroid(const Asteroid &obj, float x, float y, float rotation) {
+Asteroid::Asteroid(const Asteroid &obj, Vector2f pos, Vector2f direction, float rotation, float speed) {
   spriteWidth = obj.spriteWidth;
   spriteHeight = obj.spriteHeight;
   scale = obj.scale;
   bodyDef = obj.bodyDef;
-  bodyDef.position.Set(x, y);
+  bodyDef.position.Set(pos.x, pos.y);
   bodyDef.userData = this;
   textureID = obj.textureID;
   body = Globals::world->CreateBody(&bodyDef);
-  body->SetAngularVelocity(0.5);
+  body->SetLinearVelocity(b2Vec2(direction.x * speed, direction.y * speed));
+  body->SetAngularVelocity(rotation);
 }
 
 Asteroid::~Asteroid() {}
