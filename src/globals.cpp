@@ -42,7 +42,7 @@ GLuint Globals::getTexture(const char* name) {
 
 void Globals::createRandomAsteroid() {
 	int randomAsteroid = rand() % asteroidPrefabs.size();
-	Asteroid *ast = new Asteroid(*asteroidPrefabs.at(randomAsteroid), rand()%6, 3, 0);
+	Asteroid *ast = new Asteroid(*asteroidPrefabs.at(randomAsteroid), (rand()% 10) - 5, 3, 0);
 	asteroids.push_back(ast);
 }
 

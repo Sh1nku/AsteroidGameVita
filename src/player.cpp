@@ -18,6 +18,8 @@ Player::Player() {
 	polygonDef.vertices[3].Set(0 * scale, 0.375 * scale);
 	polygonDef.vertices[4].Set(-0.40625 * scale, -0.1875 * scale);
 	polygonDef.density = 1.0f;
+	polygonDef.categoryBits = 0x0002;
+	polygonDef.maskBits = 0x0004;
 	bodyDef.AddShape(&polygonDef);
 	body = Globals::world->CreateBody(&bodyDef);
 

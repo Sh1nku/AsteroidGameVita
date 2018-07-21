@@ -9,6 +9,8 @@ Asteroid::Asteroid(const char *name, int xSize, int ySize, b2PolyDef *polyDef) {
   spriteHeight = ySize;
   scale = spriteWidth / UNIT_SIZE;
   bodyDef.position.Set(0, 0);
+  polyDef->categoryBits = 0x0004;
+  polyDef->maskBits = 0x0002;
   bodyDef.AddShape(polyDef);
   bodyDef.userData = NULL;
   textureID = Globals::getTexture(name);

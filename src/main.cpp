@@ -4,12 +4,16 @@
 #include "globals.h"
 #include "time.h"
 #include "gameobject.h"
+#include <iostream>
 
 int main(int argc, char* args[]) {
 	init();
 	initGL();
 	Globals::init();
 	Player player;
+	Globals::createRandomAsteroid();
+	Globals::createRandomAsteroid();
+	Globals::createRandomAsteroid();
 	Globals::createRandomAsteroid();
 	Globals::createRandomAsteroid();
 	Time timer;
@@ -28,19 +32,15 @@ int main(int argc, char* args[]) {
 		    if (c->GetManifoldCount() > 0) {
 					b2Body* body1 = c->GetShape1()->GetBody();
 					b2Body* body2 = c->GetShape2()->GetBody();
-					if(body1->GetUserData() != NULL) {
-						GameObject* go1 = (GameObject*) body1->GetUserData();
+					GameObject* go1 = (GameObject*) body1->GetUserData();
+					GameObject* go2 = (GameObject*) body2->GetUserData();
+					if(go1->getType() == TYPE::ASTEROID && go2->getType() == TYPE::PLAYER) {
 						go1->hit();
-						if(go1->getType() == TYPE::ASTEROID) {
-							Globals::world->DestroyBody(body1);
-						}
+						Globals::world->DestroyBody(body1);
 					}
-					if(body2->GetUserData() != NULL) {
-						GameObject* go2 = (GameObject*) body2->GetUserData();
+					if(go2->getType() == TYPE::ASTEROID && go1->getType() == TYPE::PLAYER) {
 						go2->hit();
-						if(go2->getType() == TYPE::ASTEROID) {
-							Globals::world->DestroyBody(body2);
-						}
+						Globals::world->DestroyBody(body2);
 					}
 		    }
 		}
