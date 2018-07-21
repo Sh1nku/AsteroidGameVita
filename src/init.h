@@ -16,6 +16,11 @@ static void initGL() {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_GREATER,0);
+	glEnable (GL_CULL_FACE);
+	glCullFace (GL_BACK);
+	glFrontFace (GL_CCW);
 
 	glClearColor(0.1f, 0, 0, 1);
 	glMatrixMode(GL_PROJECTION);

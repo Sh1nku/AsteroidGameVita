@@ -9,6 +9,7 @@ int main(int argc, char* args[]) {
 	initGL();
 	Globals::init();
 	Player player;
+	Globals::createRandomAsteroid();
 	Time timer;
 
 	while(!Globals::quit) {
@@ -17,6 +18,7 @@ int main(int argc, char* args[]) {
 		Globals::world->Step(timer.getDeltaTime(), 10);
 		startDraw();
 		player.render();
+		Globals::renderAsteroids();
 		endDraw();
 	}
 	exit();

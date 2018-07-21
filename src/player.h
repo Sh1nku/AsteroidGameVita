@@ -29,6 +29,7 @@ private:
 
 	int spriteWidth = 32;
 	int spriteHeight = 32;
+	float scale;
 	int textureWidth = 128;
 	int textureHeight = 96;
 	b2Body *body;
