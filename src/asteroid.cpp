@@ -20,7 +20,7 @@ Asteroid::Asteroid(const Asteroid &obj, float x, float y, float rotation) {
   bodyDef.position.Set(x, y);
   textureID = obj.textureID;
   body = Globals::world->CreateBody(&bodyDef);
-  //body->SetAngularVelocity(0.5);
+  body->SetAngularVelocity(0.5);
 }
 
 void Asteroid::render() {

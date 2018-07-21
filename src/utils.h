@@ -8,6 +8,7 @@ extern GLuint loadTexture(const char* name);
 
 static int radToDeg(float rad) {
 	int deg = rad*(180/PI);
+	return deg;
 }
 
 static void gluPerspective(float fov, float aspectRatio, float zNear, float zFar) {
