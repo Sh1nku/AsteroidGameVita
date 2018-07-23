@@ -9,8 +9,18 @@ std::vector<Asteroid*> Globals::asteroidPrefabs;
 std::vector<Asteroid*> Globals::asteroids;
 bool Globals::quit = false;
 
-b2PolyDef asteroid1Polygons;
-b2PolyDef asteroid2Polygons;
+std::vector<std::vector<float>> asteroidPolygons;
+
+std::vector<float> asteroid1Polygons = { 
+-0.3125, -0.21875, 0.125,  -0.3125,
+0.3125, -0.15625, -0.0625, 0.1875,
+-0.21875, 0.09375, -0.3125, -0.0625 };
+
+std::vector<float> asteroid2Polygons = { 
+-0.328125, -0.1875, -0.15625, -0.375,
+0.25, -0.40625, 0.390625, -0.25, 
+0.25, 0.21875, -0.015625, 0.328125,
+-0.15625, 0.328125, -0.34375, 0.21875 };
 
 void Globals::init() {
 	b2AABB worldAABB;
@@ -18,28 +28,11 @@ void Globals::init() {
 	worldAABB.maxVertex.Set(100.0f, 100.0f);
 	world = new b2World(worldAABB, b2Vec2(0,0), false);
 
-	asteroid1Polygons.vertexCount = 6;
-	asteroid1Polygons.vertices[0].Set(-0.3125, -0.21875);
-	asteroid1Polygons.vertices[1].Set(0.125,  -0.3125);
-	asteroid1Polygons.vertices[2].Set(0.3125, -0.15625);
-	asteroid1Polygons.vertices[3].Set(-0.0625, 0.1875);
-	asteroid1Polygons.vertices[4].Set(-0.21875, 0.09375);
-	asteroid1Polygons.vertices[5].Set(-0.3125, -0.0625);
-	asteroid1Polygons.density = 1.0f;
+	asteroidPolygons.push_back(asteroid1Polygons);
+	asteroidPolygons.push_back(asteroid2Polygons);
 
-	asteroid2Polygons.vertexCount = 8;
-	asteroid2Polygons.vertices[0].Set(-0.328125 * 2, -0.1875 * 2);
-	asteroid2Polygons.vertices[1].Set(-0.15625 * 2, -0.375 * 2);
-	asteroid2Polygons.vertices[2].Set(0.25 * 2, -0.40625 * 2);
-	asteroid2Polygons.vertices[3].Set(0.390625 * 2, -0.25 * 2);
-	asteroid2Polygons.vertices[4].Set(0.25 * 2, 0.21875 * 2);
-	asteroid2Polygons.vertices[5].Set(-0.015625 * 2, 0.328125 * 2);
-	asteroid2Polygons.vertices[6].Set(-0.15625 * 2, 0.328125 * 2);
-	asteroid2Polygons.vertices[7].Set(-0.34375 * 2, 0.21875 * 2);
-	asteroid2Polygons.density = 1.0f;
-
-	asteroidPrefabs.push_back(new Asteroid("textures/asteroid1.png", 32, 32, &asteroid1Polygons));
-	asteroidPrefabs.push_back(new Asteroid("textures/asteroid2.png", 64, 64, &asteroid2Polygons));
+	asteroidPrefabs.push_back(new Asteroid("textures/asteroid1.png", 32, 32));
+	asteroidPrefabs.push_back(new Asteroid("textures/asteroid2.png", 48, 48));
 }
 
 GLuint Globals::getTexture(const char* name) {
@@ -62,7 +55,9 @@ void Globals::createRandomAsteroid() {
 	normalizedBetween.normalize();
 	float rotation = randomFloatBetween(-ROTATION_MAX, ROTATION_MAX);
 	float speed = randomFloatBetween(SPEED_MIN, SPEED_MAX);
-	Asteroid *ast = new Asteroid(*asteroidPrefabs.at(randomAsteroid), startPos, normalizedBetween, rotation, speed);
+	float scale = randomFloatBetween(SCALE_MIN, SCALE_MAX);
+	Asteroid *ast = new Asteroid(*asteroidPrefabs.at(randomAsteroid), startPos, normalizedBetween,asteroidPolygons.at(randomAsteroid),
+	scale ,rotation, speed);
 	asteroids.push_back(ast);
 }
 

@@ -4,11 +4,13 @@
 #include "globals.h"
 #include "time.h"
 #include "gameobject.h"
+#include "gui.h"
 
 int main(int argc, char* args[]) {
 	init();
 	initGL();
 	Globals::init();
+	GUI gui;
 	Player player;
 	Time timer;
 	float spawnAsteroidPer = 0.1;
@@ -24,6 +26,7 @@ int main(int argc, char* args[]) {
 			timeTaken -= spawnAsteroidPer;
 		}
 		Globals::renderAsteroids();
+		gui.drawMainMenu();
 		endDraw();
 
 		player.update();

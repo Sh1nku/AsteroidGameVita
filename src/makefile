@@ -3,11 +3,11 @@ SOURCES		:= .
 
 INCLUDES	:= include
 
-LIBS = -lvitaGL -lvita2d -lbox2d -lSceLibKernel_stub -lScePvf_stub \
+LIBS = -limgui -lvitaGL -lvita2d -lbox2d -lSceLibKernel_stub -lScePvf_stub \
 	-lSceAppMgr_stub -lSceAppUtil_stub -lScePgf_stub -lSceCtrl_stub \
 	-ljpeg -lfreetype -lc -lSceCommonDialog_stub -lpng16 -lm -lz \
 	-lSceGxm_stub -lSceDisplay_stub -lSceSysmodule_stub \
-	-lSceRtc_stub \
+	-lSceRtc_stub -lSceTouch_stub \
 
 CFILES   := $(foreach dir,$(SOURCES), $(wildcard $(dir)/*.c))
 CPPFILES   := $(foreach dir,$(SOURCES), $(wildcard $(dir)/*.cpp))

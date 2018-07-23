@@ -4,25 +4,33 @@
 #include "utils.h"
 #include "gameobject.h"
 
-Asteroid::Asteroid(const char *name, int xSize, int ySize, b2PolyDef *polyDef) {
+Asteroid::Asteroid(const char *name, int xSize, int ySize) {
   spriteWidth = xSize;
   spriteHeight = ySize;
   scale = spriteWidth / UNIT_SIZE;
   bodyDef.position.Set(0, 0);
-  polyDef->categoryBits = 0x0004;
-  polyDef->maskBits = 0x0002;
-  bodyDef.AddShape(polyDef);
   bodyDef.userData = NULL;
   textureID = Globals::getTexture(name);
 }
 
-Asteroid::Asteroid(const Asteroid &obj, Vector2f pos, Vector2f direction, float rotation, float speed) {
+Asteroid::Asteroid(const Asteroid &obj, Vector2f pos, Vector2f direction, std::vector<float> polyCoords, float scale2, float rotation, float speed) {
   spriteWidth = obj.spriteWidth;
   spriteHeight = obj.spriteHeight;
-  scale = obj.scale;
+  scale = obj.scale * scale2;
   bodyDef = obj.bodyDef;
   bodyDef.position.Set(pos.x, pos.y);
   bodyDef.userData = this;
+  b2PolyDef polyDef;
+  polyDef.categoryBits = 0x0004;
+  polyDef.maskBits = 0x0002;
+  polyDef.density = 1.0f;
+  polyDef.vertexCount = polyCoords.size() / 2;
+  int j = 0;
+  for(int i = 0; i < polyCoords.size(); i+=2) {
+    polyDef.vertices[j].Set(polyCoords.at(i) * scale, polyCoords.at(i+1) * scale);
+    j++;
+  }
+  bodyDef.AddShape(&polyDef);
   textureID = obj.textureID;
   body = Globals::world->CreateBody(&bodyDef);
   body->SetLinearVelocity(b2Vec2(direction.x * speed, direction.y * speed));

@@ -8,6 +8,8 @@
 #define ROTATION_MAX 3
 #define SPEED_MAX 4
 #define SPEED_MIN 2.5f
+#define SCALE_MIN 1
+#define SCALE_MAX 2
 
 class Asteroid;
 
