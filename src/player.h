@@ -1,6 +1,13 @@
 #pragma once
 #include "headers.h"
 #include "gameobject.h"
+#include "vectormath.h"
+
+#define PLAYER_SPEED 3
+#define PLAYER_SPEED_MODIFIER 1.7
+#define TIME_BETWEEEN_SHOTS 0.3
+
+const static Vector2f BULLET_POS(0.4, -0.2);
 
 const int FRAMES = 4;
 const int ANIMATIONS = 3;
@@ -17,7 +24,7 @@ public:
 	Player();
 	~Player();
 	void render();
-	void update();
+	void update(float dt);
 	void setAnimation(ANIMATION anim);
 	TYPE getType();
 	void hit();
@@ -35,6 +42,7 @@ private:
 	float scale;
 	int textureWidth = 128;
 	int textureHeight = 96;
+	float lastShot = TIME_BETWEEEN_SHOTS;
 	b2Body *body;
 	b2BodyDef bodyDef;
 	b2PolyDef polygonDef;

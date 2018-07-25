@@ -25,11 +25,11 @@ int main(int argc, char* args[]) {
 			Globals::createRandomAsteroid();
 			timeTaken -= spawnAsteroidPer;
 		}
-		Globals::renderAsteroids();
+		Globals::renderObjects();
 		gui.drawMainMenu();
 		endDraw();
 
-		player.update();
+		player.update(timer.getDeltaTime());
 		Globals::world->Step(timer.getDeltaTime(), 10);
 		for (b2Contact* c = Globals::world->GetContactList(); c; c = c->GetNext()) {
 		    if (c->GetManifoldCount() > 0) {
@@ -37,15 +37,11 @@ int main(int argc, char* args[]) {
 					b2Body* body2 = c->GetShape2()->GetBody();
 					GameObject* go1 = (GameObject*) body1->GetUserData();
 					GameObject* go2 = (GameObject*) body2->GetUserData();
-					if(go1->getType() == TYPE::ASTEROID && go2->getType() == TYPE::PLAYER) {
-						go1->hit();
-					}
-					if(go2->getType() == TYPE::ASTEROID && go1->getType() == TYPE::PLAYER) {
-						go2->hit();
-					}
+					go1->hit();
+					go2->hit();
 		    }
 		}
-		Globals::checkAsteroidsAndDestroy();
+		Globals::checkObjectsAndDestroy();
 
 	}
 	exit();

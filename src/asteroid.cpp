@@ -21,8 +21,8 @@ Asteroid::Asteroid(const Asteroid &obj, Vector2f pos, Vector2f direction, std::v
   bodyDef.position.Set(pos.x, pos.y);
   bodyDef.userData = this;
   b2PolyDef polyDef;
-  polyDef.categoryBits = 0x0004;
-  polyDef.maskBits = 0x0002;
+  polyDef.categoryBits = FILTER_ASTEROID;
+  polyDef.maskBits = FILTER_PLAYER | FILTER_BULLET;
   polyDef.density = 1.0f;
   polyDef.vertexCount = polyCoords.size() / 2;
   int j = 0;

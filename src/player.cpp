@@ -4,6 +4,7 @@
 #include "globals.h"
 #include "controller.h"
 #include "gameobject.h"
+#include "vectormath.h"
 
 Player::Player() {
 
@@ -18,8 +19,8 @@ Player::Player() {
 	polygonDef.vertices[3].Set(0 * scale, 0.375 * scale);
 	polygonDef.vertices[4].Set(-0.40625 * scale, -0.1875 * scale);
 	polygonDef.density = 1.0f;
-	polygonDef.categoryBits = 0x0002;
-	polygonDef.maskBits = 0x0004;
+	polygonDef.categoryBits = FILTER_PLAYER;
+	polygonDef.maskBits = FILTER_ASTEROID;
 	bodyDef.AddShape(&polygonDef);
 	body = Globals::world->CreateBody(&bodyDef);
 
@@ -57,14 +58,14 @@ void Player::render() {
 	glPopMatrix();
 }
 
-void Player::update() {
+void Player::update(float dt) {
+	lastShot += dt;
 	updateAnimation();
 	controller->update();
 	updateControls();
 }
 
 void Player::updateControls() {
-	body->SetLinearVelocity(b2Vec2(controller->leftAxisX*3, -controller->leftAxisY*3));
 	if(controller->leftAxisX > 0) {
 		setAnimation(ANIMATION::RIGHT);
 	}
@@ -73,6 +74,19 @@ void Player::updateControls() {
 	}
 	else {
 		setAnimation(ANIMATION::IDLE);
+	}
+	if(controller->r1) {
+		body->SetLinearVelocity(b2Vec2(controller->leftAxisX*PLAYER_SPEED*PLAYER_SPEED_MODIFIER, -controller->leftAxisY*PLAYER_SPEED*PLAYER_SPEED_MODIFIER));
+	}
+	else {
+		body->SetLinearVelocity(b2Vec2(controller->leftAxisX*PLAYER_SPEED, -controller->leftAxisY*PLAYER_SPEED));
+	}
+	if(lastShot > TIME_BETWEEEN_SHOTS && controller->square) {
+		lastShot = 0;
+		Vector2f bullet1(-BULLET_POS.x + this->body->GetOriginPosition().x, BULLET_POS.y + this->body->GetOriginPosition().y);
+		Vector2f bullet2(BULLET_POS.x + this->body->GetOriginPosition().x, BULLET_POS.y + this->body->GetOriginPosition().y);
+		Globals::createBullet(bullet1);
+		Globals::createBullet(bullet2);
 	}
 }
 

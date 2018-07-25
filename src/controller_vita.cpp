@@ -29,6 +29,8 @@ void Controller::update() {
   square = (ctrl.buttons & SCE_CTRL_SQUARE) > 0 ? true : false;
   circle = (ctrl.buttons & SCE_CTRL_CIRCLE) > 0 ? true : false;
   triangle = (ctrl.buttons & SCE_CTRL_TRIANGLE) > 0 ? true : false;
+  l1 = (ctrl.buttons & SCE_CTRL_L1) > 0 ? true : false;
+  r1 = (ctrl.buttons & SCE_CTRL_R1) > 0 ? true : false;
   leftAxisX = constrainAxis(ctrl.lx);
   leftAxisY = constrainAxis(ctrl.ly);
 

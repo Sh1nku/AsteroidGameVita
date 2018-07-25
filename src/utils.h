@@ -17,3 +17,23 @@ static void gluPerspective(float fov, float aspectRatio, float zNear, float zFar
 	xMax = yMax * aspectRatio;
 	glFrustum(-xMax, xMax, -yMax, yMax, zNear, zFar);
 }
+
+static void DrawCircle(int triangles, float r) 
+{ 
+		float theta = 2.f * PI / (float)triangles;
+		float c = (float) cosf(theta);
+		float s = (float) sinf(theta);
+		float t;
+
+		float x = r;
+		float y = 0; 
+	    glBegin(GL_TRIANGLE_FAN);
+		for(int i = 0; i < triangles; i++) 
+		{ 
+			glVertex2f(x, y);
+			t = x;
+			x = c * x - s * y;
+			y = s * t + c * y;
+		}
+		glEnd();
+}

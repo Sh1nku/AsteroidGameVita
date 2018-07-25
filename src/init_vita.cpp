@@ -10,6 +10,8 @@ void init() {
 	io.IniFilename = NULL;
 	ImGui_ImplVitaGL_Init();
 	ImGui::StyleColorsDark();
+	ImGuiStyle& style = ImGui::GetStyle();
+    style.WindowBorderSize = 0.0f;
 
 	ImGui_ImplVitaGL_TouchUsage(true);
 	ImGui_ImplVitaGL_UseIndirectFrontTouch(false);

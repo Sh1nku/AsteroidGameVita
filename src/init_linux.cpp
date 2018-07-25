@@ -28,6 +28,8 @@ void init() {
 	ImGui_ImplSDL2_InitForOpenGL(gWindow, gContext);
     ImGui_ImplOpenGL2_Init();
 	ImGui::StyleColorsDark();
+	ImGuiStyle& style = ImGui::GetStyle();
+    style.WindowBorderSize = 0.0f;
 }
 
 void startDraw() {

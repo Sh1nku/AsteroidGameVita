@@ -2,11 +2,13 @@
 #include "utils.h"
 #include "asteroid.h"
 #include "vectormath.h"
+#include "bullet.h"
 
 b2World *Globals::world;
 std::map<std::string, GLuint> Globals::textures;
 std::vector<Asteroid*> Globals::asteroidPrefabs;
 std::vector<Asteroid*> Globals::asteroids;
+std::vector<Bullet*> Globals::bullets;
 bool Globals::quit = false;
 
 std::vector<std::vector<float>> asteroidPolygons;
@@ -61,13 +63,16 @@ void Globals::createRandomAsteroid() {
 	asteroids.push_back(ast);
 }
 
-void Globals::renderAsteroids() {
+void Globals::renderObjects() {
 	for(int i = 0; i < asteroids.size(); i++) {
 		asteroids.at(i)->render();
 	}
+	for(int i = 0; i < bullets.size(); i++) {
+		bullets.at(i)->render();
+	}
 }
 
-void Globals::checkAsteroidsAndDestroy() {
+void Globals::checkObjectsAndDestroy() {
 	std::vector<Asteroid*>::iterator it = asteroids.begin();
 	for( ; it != asteroids.end();) {
 		b2Vec2 pos = (*it)->body->GetOriginPosition();
@@ -78,6 +83,18 @@ void Globals::checkAsteroidsAndDestroy() {
 		}
 		else {
 			++it;
+		}
+	}
+	std::vector<Bullet*>::iterator it2 = bullets.begin();
+	for( ; it2 != bullets.end();) {
+		b2Vec2 pos2 = (*it2)->body->GetOriginPosition();
+		if ((*it2)->destroy || outsideBounds(pos2)) {
+			world->DestroyBody((*it2)->body);
+			delete (*it2);
+			it2 = bullets.erase(it2);
+		}
+		else {
+			++it2;
 		}
 	}
 }
@@ -93,4 +110,9 @@ bool Globals::outsideBounds(b2Vec2 &pos) {
 		return false;
 	}
 
+}
+
+void Globals::createBullet(Vector2f &pos) {
+	Bullet *bullet = new Bullet(pos);
+	bullets.push_back(bullet);
 }

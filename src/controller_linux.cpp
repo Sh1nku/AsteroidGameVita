@@ -44,6 +44,8 @@ void Controller::update() {
   square = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_X);
   circle = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_B);
   triangle = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_Y);
+  l1 = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_LEFTSHOULDER);
+  r1 = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER);
   leftAxisX = constrainAxis(SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_LEFTX));
   leftAxisY = constrainAxis(SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_LEFTY));
 

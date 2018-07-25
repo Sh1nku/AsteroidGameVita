@@ -8,6 +8,7 @@ struct Vector2f {
 
     void normalize();
     float getLength();
+    Vector2f operator+(const Vector2f&);
 
     static Vector2f getVector(Vector2f &v1, Vector2f &v2);
 };

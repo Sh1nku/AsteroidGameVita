@@ -1,7 +1,7 @@
 #pragma once
 
 enum TYPE {
-  GAMEOBJECT, PLAYER, ASTEROID
+  GAMEOBJECT, PLAYER, ASTEROID, BULLET
 };
 
 class GameObject {
