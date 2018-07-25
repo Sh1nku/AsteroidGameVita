@@ -33,9 +33,10 @@ void Bullet::render() {
 	glTranslatef(body->GetOriginPosition().x,body->GetOriginPosition().y,-8.2);
 	glRotatef((float) radToDeg(body->GetRotation()), 0, 0, 1);
     glDisable(GL_TEXTURE_2D);
-    glColor3f(1,1,1);
+    glColor3f(0.839, 0.827, 0.258);
     DrawCircle(9, BULLET_RADIUS);
     glEnable(GL_TEXTURE_2D);
+    glColor3f(1, 1, 1);
 	glPopMatrix();
 }
 

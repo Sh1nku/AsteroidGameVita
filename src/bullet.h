@@ -3,8 +3,8 @@
 #include "gameobject.h"
 #include "vectormath.h"
 
-#define BULLET_SPEED 16
-#define BULLET_RADIUS 0.1
+#define BULLET_SPEED 20
+#define BULLET_RADIUS 0.07
 
 class Bullet : public GameObject {
 public:
