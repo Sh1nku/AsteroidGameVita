@@ -16,6 +16,8 @@
 #include <psp2/ctrl.h>
 #include <psp2/rtc.h>
 #include <imgui_vita.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #endif
 #include <math.h>
 #include <string>

@@ -5,6 +5,7 @@
 void init() {
 	vglInit(0x800000);
 	vglWaitVblankStart(true);
+	IMG_Init(IMG_INIT_PNG);
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	io.IniFilename = NULL;

@@ -7,7 +7,7 @@
 #define PLAYER_SPEED_MODIFIER 1.7
 #define TIME_BETWEEEN_SHOTS 0.3
 
-const static Vector2f BULLET_POS(0.4, -0.2);
+const static Vector2f BULLET_POS(0.35, -0.2);
 
 const int FRAMES = 4;
 const int ANIMATIONS = 3;
