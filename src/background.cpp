@@ -1,7 +1,7 @@
 #include "background.h"
 #include "globals.h"
 
-const float scale = 12.4;
+const float scale = 12;
 float yVel = 0;
 
 void initBackground() {
