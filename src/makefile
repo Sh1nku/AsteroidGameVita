@@ -5,7 +5,7 @@ INCLUDES	:= include
 
 LIBS = -limgui -lvitaGL -lvita2d -lbox2d -lSceLibKernel_stub -lScePvf_stub \
 	-lSceAppMgr_stub -lSceAppUtil_stub -lScePgf_stub -lSceCtrl_stub \
-	-ljpeg -lfreetype -lc -lSceCommonDialog_stub -lpng16 -lm -lz \
+	-ljpeg -lfreetype -lc -lSceCommonDialog_stub -lpng -lm -lz \
 	-lSceGxm_stub -lSceDisplay_stub -lSceSysmodule_stub \
 	-lSceRtc_stub -lSceTouch_stub \
 
@@ -28,7 +28,9 @@ $(TARGET).vpk: eboot.bin
 	vita-pack-vpk -s param.sfo -b eboot.bin \
 	-a textures/ship.png=textures/ship.png \
 	-a textures/asteroid1.png=textures/asteroid1.png \
-	-a textures/asteroid2.png=textures/asteroid2.png $@
+	-a textures/asteroid2.png=textures/asteroid2.png \
+	-a textures/bg.png=textures/bg.png \
+	-a textures/bullet.png=textures/bullet.png $@
 
 eboot.bin: $(TARGET).velf
 	vita-make-fself -s $< eboot.bin

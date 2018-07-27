@@ -23,8 +23,7 @@ void init() {
 void startDraw() {
 	vglStartRendering();
 	glViewport(0, 0, 960, 544);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glClear(GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void endDraw() {

@@ -4,7 +4,8 @@ NAME := AsteroidGameLinux
 all:
 	g++ -o $(NAME) main.cpp globals.cpp init_linux.cpp utils_linux.cpp \
 	 gameobject.cpp player.cpp controller_linux.cpp time_linux.cpp asteroid.cpp \
-	 vectormath.cpp gui.cpp gui_linux.cpp bullet.cpp imgui/imgui_impl_sdl.cpp imgui/imgui_impl_opengl2.cpp \
+	 vectormath.cpp gui.cpp gui_linux.cpp bullet.cpp background.cpp \
+	 imgui/imgui_impl_sdl.cpp imgui/imgui_impl_opengl2.cpp \
 	 imgui/imgui.cpp imgui/imgui_draw.cpp $(LDFLAGS) \
 
 clean:

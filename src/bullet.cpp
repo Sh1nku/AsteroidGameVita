@@ -29,15 +29,30 @@ void Bullet::hit() {
 }
 
 void Bullet::render() {
+    glBindTexture(GL_TEXTURE_2D, bulletTexture);
     glPushMatrix();
-	glTranslatef(body->GetOriginPosition().x,body->GetOriginPosition().y,-8.2);
+	glTranslatef(body->GetOriginPosition().x,body->GetOriginPosition().y,-8.15);
 	glRotatef((float) radToDeg(body->GetRotation()), 0, 0, 1);
-    glDisable(GL_TEXTURE_2D);
-    glColor3f(0.839, 0.827, 0.258);
-    DrawCircle(9, BULLET_RADIUS);
-    glEnable(GL_TEXTURE_2D);
-    glColor3f(1, 1, 1);
+    glBegin(GL_QUADS);
+    glTexCoord2f(((float)frame) / FRAMES, 1);
+
+	glVertex3f(-0.5f * scale, -0.5f * scale, 0);
+	glTexCoord2f(((float)frame + 1) / FRAMES ,1);
+
+	glVertex3f(0.5f * scale, -0.5f * scale, 0);
+	glTexCoord2f(((float)frame + 1) / FRAMES, 0);
+
+	glVertex3f(0.5f * scale, 0.5f * scale, 0);
+	glTexCoord2f(((float)frame) / FRAMES, 0);
+
+	glVertex3f(-0.5f * scale, 0.5f * scale, 0);
+    glEnd();
+
 	glPopMatrix();
+    frame++;
+    if(frame >= FRAMES) {
+        frame = 0;
+    }
 }
 
 TYPE Bullet::getType() {

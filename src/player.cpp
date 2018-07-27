@@ -43,7 +43,7 @@ void Player::render() {
 	int y = texCoords[currentAnimation][currentFrame].y;
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glPushMatrix();
-	glTranslatef(body->GetOriginPosition().x,body->GetOriginPosition().y,-8);
+	glTranslatef(body->GetOriginPosition().x,body->GetOriginPosition().y,-8.f);
 	glRotatef((float) radToDeg(body->GetRotation()), 0, 0, 1);
 	glBegin(GL_QUADS);
 	glTexCoord2f((float)x / textureWidth, ((float)y + spriteHeight) / textureHeight);

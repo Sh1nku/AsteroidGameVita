@@ -3,6 +3,7 @@
 #include "asteroid.h"
 #include "vectormath.h"
 #include "bullet.h"
+#include "background.h"
 
 b2World *Globals::world;
 std::map<std::string, GLuint> Globals::textures;
@@ -12,6 +13,8 @@ std::vector<Bullet*> Globals::bullets;
 bool Globals::quit = false;
 
 std::vector<std::vector<float>> asteroidPolygons;
+
+GLuint Bullet::bulletTexture = 0;
 
 std::vector<float> asteroid1Polygons = { 
 -0.3125, -0.21875, 0.125,  -0.3125,
@@ -35,6 +38,8 @@ void Globals::init() {
 
 	asteroidPrefabs.push_back(new Asteroid("textures/asteroid1.png", 32, 32));
 	asteroidPrefabs.push_back(new Asteroid("textures/asteroid2.png", 48, 48));
+	Bullet::bulletTexture = getTexture("textures/bullet.png");
+	initBackground();
 }
 
 GLuint Globals::getTexture(const char* name) {
@@ -103,7 +108,7 @@ bool Globals::outsideBounds(b2Vec2 &pos) {
 	if(pos.x < -PLAYAREA_X || pos.x > PLAYAREA_X) {
 		return true;
 	}
-	else if(pos.y < PLAYEAREA_Y_BOT) {
+	else if(pos.y < PLAYEAREA_Y_BOT || pos.y > PLAYAREA_Y_TOP) {
 		return true;
 	}
 	else {

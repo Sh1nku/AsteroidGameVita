@@ -5,6 +5,7 @@
 #include "time.h"
 #include "gameobject.h"
 #include "gui.h"
+#include "background.h"
 
 int main(int argc, char* args[]) {
 	init();
@@ -20,6 +21,7 @@ int main(int argc, char* args[]) {
 		timer.update();
 		timeTaken += timer.getDeltaTime();
 		startDraw();
+		renderBackground(timer.getDeltaTime());
 		player.render();
 		if(timeTaken > spawnAsteroidPer) {
 			Globals::createRandomAsteroid();
