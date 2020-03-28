@@ -11,6 +11,7 @@ std::vector<Asteroid*> Globals::asteroidPrefabs;
 std::vector<Asteroid*> Globals::asteroids;
 std::vector<Bullet*> Globals::bullets;
 bool Globals::quit = false;
+PLAYSTATE Globals::state = PLAYSTATE::MAIN_MENU;
 
 std::vector<std::vector<float>> asteroidPolygons;
 

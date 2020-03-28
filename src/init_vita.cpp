@@ -10,9 +10,11 @@ void init() {
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	io.IniFilename = NULL;
 	ImGui_ImplVitaGL_Init();
+	io.MouseDrawCursor = false;
 	ImGui::StyleColorsDark();
 	ImGuiStyle& style = ImGui::GetStyle();
     style.WindowBorderSize = 0.0f;
+	ImGui::SetMouseCursor(ImGuiMouseCursor_None);
 
 	ImGui_ImplVitaGL_TouchUsage(true);
 	ImGui_ImplVitaGL_UseIndirectFrontTouch(false);

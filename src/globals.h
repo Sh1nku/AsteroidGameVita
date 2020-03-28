@@ -20,6 +20,10 @@
 class Asteroid;
 class Bullet;
 
+enum PLAYSTATE {
+	MAIN_MENU, GAME, EXIT
+};
+
 class Globals
 {
 public:
@@ -33,6 +37,8 @@ public:
 	static void checkObjectsAndDestroy();
 	static std::vector<Asteroid*> asteroids;
 	static std::vector<Bullet*> bullets;
+
+	static PLAYSTATE state;
 
 private:
 	static bool outsideBounds(b2Vec2 &pos);

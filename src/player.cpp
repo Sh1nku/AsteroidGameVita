@@ -66,27 +66,35 @@ void Player::update(float dt) {
 }
 
 void Player::updateControls() {
-	if(controller->leftAxisX > 0) {
-		setAnimation(ANIMATION::RIGHT);
-	}
-	else if(controller->leftAxisX < 0) {
-		setAnimation(ANIMATION::LEFT);
-	}
-	else {
-		setAnimation(ANIMATION::IDLE);
-	}
-	if(controller->r1) {
-		body->SetLinearVelocity(b2Vec2(controller->leftAxisX*PLAYER_SPEED*PLAYER_SPEED_MODIFIER, -controller->leftAxisY*PLAYER_SPEED*PLAYER_SPEED_MODIFIER));
-	}
-	else {
-		body->SetLinearVelocity(b2Vec2(controller->leftAxisX*PLAYER_SPEED, -controller->leftAxisY*PLAYER_SPEED));
-	}
-	if(lastShot > TIME_BETWEEEN_SHOTS && controller->square) {
-		lastShot = 0;
-		Vector2f bullet1(-BULLET_POS.x + this->body->GetOriginPosition().x, BULLET_POS.y + this->body->GetOriginPosition().y);
-		Vector2f bullet2(BULLET_POS.x + this->body->GetOriginPosition().x, BULLET_POS.y + this->body->GetOriginPosition().y);
-		Globals::createBullet(bullet1);
-		Globals::createBullet(bullet2);
+	switch (Globals::state) {
+		case MAIN_MENU:
+		break;
+		case GAME:
+
+			if(controller->leftAxisX > 0) {
+				setAnimation(ANIMATION::RIGHT);
+			}
+			else if(controller->leftAxisX < 0) {
+				setAnimation(ANIMATION::LEFT);
+			}
+			else {
+				setAnimation(ANIMATION::IDLE);
+			}
+			if(controller->r1) {
+				body->SetLinearVelocity(b2Vec2(controller->leftAxisX*PLAYER_SPEED*PLAYER_SPEED_MODIFIER, -controller->leftAxisY*PLAYER_SPEED*PLAYER_SPEED_MODIFIER));
+			}
+			else {
+				body->SetLinearVelocity(b2Vec2(controller->leftAxisX*PLAYER_SPEED, -controller->leftAxisY*PLAYER_SPEED));
+			}
+			if(lastShot > TIME_BETWEEEN_SHOTS && controller->square) {
+				lastShot = 0;
+				Vector2f bullet1(-BULLET_POS.x + this->body->GetOriginPosition().x, BULLET_POS.y + this->body->GetOriginPosition().y);
+				Vector2f bullet2(BULLET_POS.x + this->body->GetOriginPosition().x, BULLET_POS.y + this->body->GetOriginPosition().y);
+				Globals::createBullet(bullet1);
+				Globals::createBullet(bullet2);
+			}
+
+		break;
 	}
 }
 

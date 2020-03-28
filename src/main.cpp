@@ -19,16 +19,26 @@ int main(int argc, char* args[]) {
 
 	while(!Globals::quit) {
 		timer.update();
-		timeTaken += timer.getDeltaTime();
 		startDraw();
 		renderBackground(timer.getDeltaTime());
 		player.render();
-		if(timeTaken > spawnAsteroidPer) {
-			Globals::createRandomAsteroid();
-			timeTaken -= spawnAsteroidPer;
-		}
-		Globals::renderObjects();
-		gui.drawMainMenu();
+		switch (Globals::state) {
+			case MAIN_MENU:
+				gui.drawMainMenu();
+			break;
+			case GAME:
+				timeTaken += timer.getDeltaTime();
+				if(timeTaken > spawnAsteroidPer) {
+					Globals::createRandomAsteroid();
+					timeTaken -= spawnAsteroidPer;
+				}
+				Globals::renderObjects();
+				gui.drawGame();
+			break;
+			case EXIT:
+				Globals::quit = true;
+			break;
+		};
 		endDraw();
 
 		player.update(timer.getDeltaTime());
