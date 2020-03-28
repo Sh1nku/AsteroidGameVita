@@ -3,4 +3,7 @@
 *.vpk
 *.bin
 *.o
+*.sfo
 src/AsteroidGameLinux
+.vscode/
+imgui/
